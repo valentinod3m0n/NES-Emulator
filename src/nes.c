@@ -21,7 +21,7 @@ int main(int argc, char *argv[]){
 	nes.rom = load_cartridge(rom_path);
 	//nes.mapper = nes.mapper->create_mapper(nes.rom);
 	
-	free(nes.rom);
-	printf("ROM WAS SUCCESFULLY READ\n");
+	free_rom(nes.rom);
+	printf("ROM WAS SUCCESFULLY READ.\n");
 	return 0;
 }

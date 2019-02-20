@@ -18,8 +18,11 @@ all: $(EXE)
 $(EXE): $(OBJ)
 	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | object
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+
+object:
+	mkdir -p $(OBJ_DIR)
 
 clean:
 	$(RM) $(OBJ)

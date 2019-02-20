@@ -67,6 +67,7 @@ int allocate_and_read_trainer(NESRom * rom, FILE *fp){
 	return 1;
 }
 
+
 int allocate_and_read_pgr_rom(NESRom * rom, FILE *fp){
 	if (rom->pgr_size == PGR_BANK_SIZE){
 		//Needs to be mirrored if there's just 1 bank.
@@ -77,8 +78,8 @@ int allocate_and_read_pgr_rom(NESRom * rom, FILE *fp){
 			free(rom->pgr_rom);
 			return -1;
 		}
-		printf("The ROM has a 1 PGR BANK and it has been read.\n");
 		
+		printf("The ROM has a 1 PGR BANK and it has been read.\nPGR_ROM will be mirrored.\n");
 		if (memcpy(&rom->pgr_rom[PGR_BANK_SIZE], rom->pgr_rom, PGR_BANK_SIZE) == NULL){
 			perror("memcpy");
 			free(rom->pgr_rom);
@@ -174,6 +175,7 @@ NESRom* load_cartridge(const char* path){
 }
 
 void free_rom(NESRom * rom){
+	printf("Freeing ROM.\n");
 	free(rom->trainer);
 	free(rom->pgr_rom);
 	free(rom->chr_rom);
