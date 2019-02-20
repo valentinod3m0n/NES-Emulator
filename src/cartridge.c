@@ -1,5 +1,29 @@
 #include "cartridge.h"
 
+struct Cartridge{
+    uint8_t NES[4];
+    uint8_t pgr_banks_count;
+    uint8_t chr_banks_count;
+    //ROM CONTROL BYTES:
+    uint8_t rom_control_1;
+    uint8_t rom_control_2;
+    uint8_t ram_banks_count;
+    uint8_t reserved[7];
+};
+
+struct NESROM{
+    size_t pgr_size;
+    size_t chr_size;
+    uint8_t mapper;
+    uint8_t battery;
+    uint8_t mirroring;
+    uint8_t *trainer;
+    size_t ram_size;
+    uint8_t *pgr_rom;
+    uint8_t *chr_rom;
+};
+
+
 NESRom* load_cartridge(const char* path){
 	Cartridge cart;
 	NESRom* rom;

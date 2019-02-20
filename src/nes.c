@@ -1,5 +1,14 @@
 #include "nes.h"
 
+struct NES{
+	NESRom * rom;
+    //Mapper mapper;
+    //CPU cpu;
+    //PPU cpu;
+    //APU apu;
+    //Controller controller;
+};
+
 int main(int argc, char *argv[]){
 	if (argc < 2){
 		printf("USO: nes_emulator <rom_path>\n");
