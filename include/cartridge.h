@@ -14,6 +14,7 @@
 #define CHR_BANK_SIZE			0x2000
 #define RAM_BANK_SIZE			0x2000
 #define TRAINER_SIZE			0x200
+#define NES_MAGIC_LE			"\x4e\x45\x53\x1a"
 
 typedef struct Cartridge{
 	uint8_t NES[4];
@@ -37,7 +38,6 @@ typedef struct NESROM{
 	uint8_t *pgr_rom;
 	uint8_t *chr_rom;
 } NESRom;
-
 
 NESRom* load_cartridge(const char * path);
 void free_rom(NESRom * rom);

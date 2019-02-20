@@ -17,7 +17,7 @@ NESRom* load_cartridge(const char* path){
 	}
 	
 	//CONSIDERING IT'S LITTLE ENDIAN
-	if (memcmp(cart.NES, "\x4e\x45\x53\x1a", 4 != 0)){
+	if (memcmp(cart.NES, NES_MAGIC_LE, 4) != 0){
 		printf("This is not a iNES file.\n");
 		return NULL;
 	}
@@ -55,7 +55,7 @@ NESRom* load_cartridge(const char* path){
 			return NULL;
 		}
 		printf("The ROM has a trainer and it has been read.\n");
-	}
+	}else printf("The ROM doesn't have a trainer.\n");
 
 	if (cart.pgr_banks_count == 1){
 		//Needs to be mirrored if there's just 1 bank.
@@ -66,7 +66,7 @@ NESRom* load_cartridge(const char* path){
 			free(rom);
 			return NULL;
 		}
-		printf("The ROM has a 1 PGR BANK and it has been read.\n");
+		printf("The ROM has a 1 PGR BANK and it has been read.\nPGR_ROM will be mirrored.\n");
 		if (memcpy(&rom->pgr_rom[PGR_BANK_SIZE], rom->pgr_rom, PGR_BANK_SIZE) == NULL){
 			perror("memcpy");
 			free(rom);
@@ -94,7 +94,7 @@ NESRom* load_cartridge(const char* path){
 			return NULL;
 		}
 		printf("The ROM has CHR ROM and it has been read.\n");
-	}
+	}else printf("The ROM doesn't have CHR ROM.\n");
 
 	fclose(fp);
 
@@ -102,6 +102,7 @@ NESRom* load_cartridge(const char* path){
 }
 
 void free_rom(NESRom * rom){
+	printf("Freeing ROM.\n");
 	free(rom->trainer);
 	free(rom->pgr_rom);
 	free(rom->chr_rom);
