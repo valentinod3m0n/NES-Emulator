@@ -31,7 +31,6 @@ CPU * initialize(CPU * cpu){
 
 void free_cpu(CPU * cpu){
 	free(cpu->ram);
-	free(cpu->stack);
 	free(cpu);
 }
 
